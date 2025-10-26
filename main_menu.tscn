@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://c52r2qqc415ng"]
+
+[ext_resource type="Script" uid="uid://k2a8olybbex1" path="res://play_buton.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://carva3774305" path="res://main_menu_script.gd" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://cb0ntlhbwr43r" path="res://exit_button.gd" id="2_7vrkn"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fu7sn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 97
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 92.51)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Abyss Smash"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Play"
+script = ExtResource("1_06t4h")
+
+[node name="Controls" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Controls"
+
+[node name="Exit" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Exit
+"
+script = ExtResource("2_7vrkn")
+
+[connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Play" to="MarginContainer/VSplitContainer/VBoxContainer/Play" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/VBoxContainer/Exit" to="MarginContainer/VSplitContainer/VBoxContainer/Exit" method="_on_pressed"]

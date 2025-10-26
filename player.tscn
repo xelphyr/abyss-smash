@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://ceoiqr4ob3nhd"]
+
+[ext_resource type="Texture2D" uid="uid://u0q1xsprdsel" path="res://player.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bdlrbs8dijwyv" path="res://player_controller.gd" id="1_i3pqv"]
+[ext_resource type="Script" uid="uid://dy675mlv4ieaj" path="res://player_animation_handler.gd" id="2_onrkg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4flbx"]
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_4flbx"]
+resource_name = "Jump_Cutscene"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76666665, 1.2666667, 2.1, 3.7, 4.9333334),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -14), Vector2(0, -0.83247375), Vector2(0, 31), Vector2(0, 2.3813438), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_onrkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3pqv"]
+_data = {
+&"Jump_Cutscene": SubResource("Animation_4flbx"),
+&"RESET": SubResource("Animation_onrkg")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_i3pqv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_4flbx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i3pqv")
+}
+script = ExtResource("2_onrkg")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]
