@@ -44,7 +44,7 @@ _data = {
 &"RESET": SubResource("Animation_onrkg")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_i3pqv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

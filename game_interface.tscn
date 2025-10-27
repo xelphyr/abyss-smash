@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://gv8hfisxwv5u"]
+
+[ext_resource type="Theme" uid="uid://byy8xjyn06tcf" path="res://themes/health.tres" id="1_p42tn"]
+[ext_resource type="Script" uid="uid://bgb2aojh0lna5" path="res://game_interface.gd" id="1_w1u8j"]
+[ext_resource type="Script" uid="uid://nqilufsdg2py" path="res://health_bar.gd" id="2_ar3a4"]
+[ext_resource type="Theme" uid="uid://gmwbtckbasru" path="res://themes/stamina.tres" id="3_w1u8j"]
+[ext_resource type="Script" uid="uid://cb2j08lht27ev" path="res://stamina_bar.gd" id="4_ar3a4"]
+[ext_resource type="Texture2D" uid="uid://djtt7k45oa0ri" path="res://images/blob.png" id="6_g21cx"]
+[ext_resource type="Script" uid="uid://de0l6at64um1v" path="res://heal_count_text.gd" id="7_qkfqt"]
+[ext_resource type="Script" uid="uid://dy1yebicf7amt" path="res://punch_count_text.gd" id="8_yayck"]
+[ext_resource type="Script" uid="uid://bws3qdq86o26g" path="res://shield_count_text.gd" id="9_42238"]
+
+[node name="GameInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1u8j")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 700
+split_offset = 215
+dragging_enabled = false
+drag_area_highlight_in_editor = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Health" type="ProgressBar" parent="HSplitContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_p42tn")
+fill_mode = 3
+show_percentage = false
+script = ExtResource("2_ar3a4")
+
+[node name="Stamina" type="ProgressBar" parent="HSplitContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_w1u8j")
+fill_mode = 3
+show_percentage = false
+script = ExtResource("4_ar3a4")
+
+[node name="MarginContainer2" type="MarginContainer" parent="HSplitContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 400
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Heal" type="HSplitContainer" parent="HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer/MarginContainer2/VBoxContainer/Heal"]
+modulate = Color(0.4752, 0.72, 0.51192, 1)
+layout_mode = 2
+texture = ExtResource("6_g21cx")
+
+[node name="Label" type="Label" parent="HSplitContainer/MarginContainer2/VBoxContainer/Heal"]
+layout_mode = 2
+text = "0"
+script = ExtResource("7_qkfqt")
+
+[node name="Punch" type="HSplitContainer" parent="HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer/MarginContainer2/VBoxContainer/Punch"]
+modulate = Color(0.85779446, 0.37233827, 0.39432448, 1)
+layout_mode = 2
+texture = ExtResource("6_g21cx")
+
+[node name="Label" type="Label" parent="HSplitContainer/MarginContainer2/VBoxContainer/Punch"]
+layout_mode = 2
+text = "0"
+script = ExtResource("8_yayck")
+
+[node name="Shield" type="HSplitContainer" parent="HSplitContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer/MarginContainer2/VBoxContainer/Shield"]
+modulate = Color(0.21335828, 0.717858, 0.85263854, 1)
+layout_mode = 2
+texture = ExtResource("6_g21cx")
+
+[node name="Label" type="Label" parent="HSplitContainer/MarginContainer2/VBoxContainer/Shield"]
+layout_mode = 2
+text = "0"
+script = ExtResource("9_42238")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdnbhwu3h36b5"]
+
+[ext_resource type="Script" uid="uid://bipdt2uc2cegl" path="res://powerup.gd" id="1_8s6r0"]
+[ext_resource type="Texture2D" uid="uid://djtt7k45oa0ri" path="res://images/blob.png" id="2_by1ca"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgail"]
+radius = 15.033297
+
+[node name="Punch" type="Area2D"]
+script = ExtResource("1_8s6r0")
+powerup_type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bgail")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.85779446, 0.37233827, 0.39432448, 1)
+position = Vector2(1.1920929e-07, -1.1920929e-07)
+scale = Vector2(0.44531253, 0.44531253)
+texture = ExtResource("2_by1ca")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

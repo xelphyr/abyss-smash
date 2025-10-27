@@ -1,20 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0rbe2ra5veak"]
+[gd_scene load_steps=12 format=3 uid="uid://d0rbe2ra5veak"]
 
 [ext_resource type="PackedScene" uid="uid://c52r2qqc415ng" path="res://main_menu.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://gv8hfisxwv5u" path="res://game_interface.tscn" id="2_1bvp3"]
+[ext_resource type="Curve" uid="uid://dlinjlipksmyp" path="res://misc/fall_curve.tres" id="2_4c57u"]
 [ext_resource type="PackedScene" uid="uid://ceoiqr4ob3nhd" path="res://player.tscn" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://c7ofaeqou0b7k" path="res://images/TopWorld.png" id="3_5vw27"]
+[ext_resource type="PackedScene" uid="uid://bd2xfmnfqtb2i" path="res://spawner.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cq5o1jxb1kd84" path="res://world_top.gd" id="3_kek77"]
+[ext_resource type="Script" uid="uid://grdorv8kyyg1" path="res://walls.gd" id="5_272bh"]
+[ext_resource type="Texture2D" uid="uid://cbhrenffb4p1i" path="res://images/World1FullWall.png" id="6_7mycd"]
+[ext_resource type="Texture2D" uid="uid://rptv2oo08w17" path="res://images/World1Bg.png" id="6_272bh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0xm2m"]
 normal = Vector2(-0.9997418, 0.022721404)
-distance = 19.85851
+distance = 258.3424
 
 [node name="Game" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(0, 900)
+ignore_camera_scroll = true
+script = ExtResource("5_272bh")
+cutscene_easing = ExtResource("2_4c57u")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(582, 496)
+texture = ExtResource("6_272bh")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("3_kek77")
+cutscene_easing = ExtResource("2_4c57u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(557.99994, -40.999996)
+scale = Vector2(1.2599999, 1.2599999)
+texture = ExtResource("3_5vw27")
+
+[node name="Spawner" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(595, 749)
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+repeat_size = Vector2(0, 900)
+ignore_camera_scroll = true
+script = ExtResource("5_272bh")
+cutscene_easing = ExtResource("2_4c57u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+texture_filter = 1
+position = Vector2(10, 533)
+texture = ExtResource("6_7mycd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D2"]
+texture_filter = 1
+position = Vector2(1146, 534)
+rotation = 3.1415927
+texture = ExtResource("6_7mycd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("1_0xm2m")]
 
-[node name="Player" parent="." instance=ExtResource("2_h2yge")]
-position = Vector2(571, 188)
+[node name="GameInterface" parent="CanvasLayer" instance=ExtResource("2_1bvp3")]
+visible = false
 
 [node name="Boundary" type="StaticBody2D" parent="."]
 
@@ -25,3 +72,6 @@ shape = SubResource("WorldBoundaryShape2D_0xm2m")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary"]
 position = Vector2(1151, -4)
 shape = SubResource("WorldBoundaryShape2D_0xm2m")
+
+[node name="Player" parent="Boundary" instance=ExtResource("2_h2yge")]
+position = Vector2(573, 32)

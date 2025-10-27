@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc3leyjv4gkuw"]
+
+[ext_resource type="Script" uid="uid://cuhoyl22jt1dm" path="res://obstacle.gd" id="1_nhk5b"]
+[ext_resource type="Texture2D" uid="uid://bet3r51uvf1ya" path="res://images/lightbrick.png" id="1_s8olr"]
+[ext_resource type="PackedScene" uid="uid://b0ou1t2nixu58" path="res://powerup_spawner.tscn" id="3_mow5b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_673ty"]
+size = Vector2(195, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkjkn"]
+size = Vector2(359, 20)
+
+[node name="Obstacle1B" type="Area2D"]
+script = ExtResource("1_nhk5b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-229.5, -2)
+shape = SubResource("RectangleShape2D_673ty")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(185.5, 0)
+shape = SubResource("RectangleShape2D_jkjkn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-230.00002, -2.3749998)
+scale = Vector2(196.00005, 24.749998)
+texture = ExtResource("1_s8olr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(185.49998, 3.5762787e-07)
+scale = Vector2(358.99997, 20)
+texture = ExtResource("1_s8olr")
+
+[node name="PowerupSpawner" parent="." instance=ExtResource("3_mow5b")]
+position = Vector2(-56, -2)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

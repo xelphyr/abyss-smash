@@ -10,5 +10,4 @@ func _start_jump_cutscene() -> void:
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Jump_Cutscene":
-		print("woo")
 		EventManager.player_ready.emit()
